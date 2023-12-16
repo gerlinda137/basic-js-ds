@@ -15,20 +15,54 @@ const { ListNode } = require("../extensions/list-node.js");
  */
 class Queue {
   getUnderlyingList() {
-    throw new NotImplementedError("Not implemented");
-    // remove line with error and write your code here
+    // throw new NotImplementedError("Not implemented");
+    let currNode = Queue.head;
+    while (currNode.next !== null) {
+      currNode = currNode.next;
+    }
+    return currNode;
   }
 
-  enqueue(/* value */) {
-    throw new NotImplementedError("Not implemented");
-    // remove line with error and write your code here
+  enqueue(value) {
+    // throw new NotImplementedError("Not implemented");
+    let node = new ListNode();
+    node.value = value;
+    node.next = null;
+
+    if (Queue.head == null) {
+      Queue.head = node;
+    } else {
+      let currNode = Queue.head;
+      if (currNode.next == null) {
+        currNode.next = node;
+        currNode = currNode.next;
+        currNode.value = value;
+      } else {
+        while (currNode.next !== null) {
+          currNode = currNode.next;
+        }
+        currNode.next = node;
+        currNode = currNode.next;
+        currNode.value = value;
+      }
+    }
+    return Queue;
   }
 
   dequeue() {
-    throw new NotImplementedError("Not implemented");
-    // remove line with error and write your code here
+    // throw new NotImplementedError("Not implemented");
+    const originHead = Queue.head.value;
+    Queue.head = Queue.head.next;
+    return originHead;
   }
 }
+//const queue = new Queue();
+//queue.enqueue(666);
+// queue.enqueue(6);
+// queue.enqueue(7);
+// const resultDequee = queue.dequeue();
+// // queue.dequeue();
+// queue.getUnderlyingList();
 
 module.exports = {
   Queue,
