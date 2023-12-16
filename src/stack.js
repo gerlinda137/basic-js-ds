@@ -18,21 +18,26 @@ class Stack {
   push(element) {
     // throw new NotImplementedError('Not implemented');
     this.stackArray.push(element);
+    console.log(`added ${element}`);
   }
 
   pop() {
-    throw new NotImplementedError("Not implemented");
-    // remove line with error and write your code here
+    // throw new NotImplementedError("Not implemented");
+    return this.stackArray.pop();
   }
 
   peek() {
-    throw new NotImplementedError("Not implemented");
-    // remove line with error and write your code here
+    // throw new NotImplementedError("Not implemented");
+    return this.stackArray[this.stackArray.length - 1];
   }
 }
 const stack = new Stack();
 
-stack.push(1);
+stack.push(5);
+stack.push(6);
+stack.push(7);
+stack.peek();
+stack.pop();
 
 console.log(stack.stackArray);
 
