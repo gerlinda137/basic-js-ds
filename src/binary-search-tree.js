@@ -108,7 +108,7 @@ class BinarySearchTree {
       if (prevNode.left == currNode) {
         prevNode.left = null;
       } else if (prevNode.right == currNode) {
-        prevNode.right == null;
+        prevNode.right = null;
       }
       return;
     }
@@ -175,17 +175,21 @@ class BinarySearchTree {
 }
 
 const bt = new BinarySearchTree();
+bt.add(9);
+bt.add(14); //deleted
 bt.add(2);
-bt.add(7);
-bt.add(1);
+bt.add(6);
+bt.add(128);
 bt.add(8);
-bt.add(4);
-bt.add(32);
-bt.add(12);
+bt.add(31);
 bt.add(54);
-bt.min();
-bt.max();
+bt.add(1);
+bt.remove(14);
+bt.remove(8);
+bt.remove(9);
 bt.remove(1);
+bt.has(8);
+bt.has(54);
 
 module.exports = {
   BinarySearchTree,
