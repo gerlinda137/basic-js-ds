@@ -16,10 +16,7 @@ const { ListNode } = require("../extensions/list-node.js");
 class Queue {
   getUnderlyingList() {
     // throw new NotImplementedError("Not implemented");
-    let currNode = Queue.head;
-    while (currNode.next !== null) {
-      currNode = currNode.next;
-    }
+    let currNode = this.head;
     return currNode;
   }
 
@@ -29,10 +26,10 @@ class Queue {
     node.value = value;
     node.next = null;
 
-    if (Queue.head == null) {
-      Queue.head = node;
+    if (this.head == null) {
+      this.head = node;
     } else {
-      let currNode = Queue.head;
+      let currNode = this.head;
       if (currNode.next == null) {
         currNode.next = node;
         currNode = currNode.next;
@@ -46,23 +43,16 @@ class Queue {
         currNode.value = value;
       }
     }
-    return Queue;
+    return this;
   }
 
   dequeue() {
     // throw new NotImplementedError("Not implemented");
-    const originHead = Queue.head.value;
-    Queue.head = Queue.head.next;
+    const originHead = this.head.value;
+    this.head = this.head.next;
     return originHead;
   }
 }
-//const queue = new Queue();
-//queue.enqueue(666);
-// queue.enqueue(6);
-// queue.enqueue(7);
-// const resultDequee = queue.dequeue();
-// // queue.dequeue();
-// queue.getUnderlyingList();
 
 module.exports = {
   Queue,
