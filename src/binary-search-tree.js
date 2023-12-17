@@ -50,9 +50,21 @@ class BinarySearchTree {
     }
   }
 
-  has(/* data */) {
-    throw new NotImplementedError("Not implemented");
-    // remove line with error and write your code here
+  has(data) {
+    // throw new NotImplementedError("Not implemented");
+    let currNode = this.rootNode;
+    while (true) {
+      if (!currNode) {
+        return false;
+      }
+      if (data < currNode.data) {
+        currNode = currNode.left;
+      } else if (data > currNode.data) {
+        currNode = currNode.right;
+      } else if (data == currNode.data) {
+        return true;
+      }
+    }
   }
 
   find(/* data */) {
@@ -86,6 +98,8 @@ console.log(bt);
 bt.add(3);
 console.log(bt);
 bt.root();
+bt.has(2);
+bt.has(10);
 
 module.exports = {
   BinarySearchTree,
