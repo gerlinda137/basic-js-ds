@@ -67,9 +67,21 @@ class BinarySearchTree {
     }
   }
 
-  find(/* data */) {
-    throw new NotImplementedError("Not implemented");
-    // remove line with error and write your code here
+  find(data) {
+    // throw new NotImplementedError("Not implemented");
+    let currNode = this.rootNode;
+    while (true) {
+      if (!currNode) {
+        return null;
+      }
+      if (data < currNode.data) {
+        currNode = currNode.left;
+      } else if (data > currNode.data) {
+        currNode = currNode.right;
+      } else if (data == currNode.data) {
+        return currNode;
+      }
+    }
   }
 
   remove(/* data */) {
@@ -89,17 +101,15 @@ class BinarySearchTree {
 }
 
 const bt = new BinarySearchTree();
-bt.add(1);
-console.log(bt);
 bt.add(2);
-console.log(bt);
-bt.add(5);
-console.log(bt);
-bt.add(3);
-console.log(bt);
-bt.root();
-bt.has(2);
-bt.has(10);
+bt.add(7);
+bt.add(1);
+bt.add(8);
+bt.add(4);
+bt.add(32);
+bt.add(12);
+bt.add(14);
+bt.find(8);
 
 module.exports = {
   BinarySearchTree,
