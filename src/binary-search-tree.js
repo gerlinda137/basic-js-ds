@@ -85,67 +85,66 @@ class BinarySearchTree {
   }
 
   remove(data) {
-    let currNode = this.rootNode;
-    let prevNode = currNode;
-    while (true) {
-      if (!currNode) {
-        return null;
+    removeKek(this.rootNode, data);
+    function removeKek(searchNode, data) {
+      let currNode = searchNode;
+      let prevNode = currNode;
+      while (true) {
+        if (!currNode) {
+          return null;
+        }
+        if (data < currNode.data) {
+          prevNode = currNode;
+          currNode = currNode.left;
+        } else if (data > currNode.data) {
+          prevNode = currNode;
+          currNode = currNode.right;
+        } else if (data == currNode.data) {
+          break;
+        }
       }
-      if (data < currNode.data) {
-        prevNode = currNode;
-        currNode = currNode.left;
-      } else if (data > currNode.data) {
-        prevNode = currNode;
-        currNode = currNode.right;
-      } else if (data == currNode.data) {
-        break;
+
+      let deletable = currNode;
+
+      if (!deletable.right && !deletable.left) {
+        if (prevNode.left == currNode) {
+          prevNode.left = null;
+        } else if (prevNode.right == currNode) {
+          prevNode.right = null;
+        }
+        return;
       }
-    }
-
-    let deletable = currNode;
-
-    if (!deletable.right && !deletable.left) {
-      if (prevNode.left == currNode) {
-        prevNode.left = null;
-      } else if (prevNode.right == currNode) {
-        prevNode.right = null;
+      if (!deletable.left) {
+        if (prevNode.left == currNode) {
+          prevNode.left = deletable.right;
+        } else if (prevNode.right == currNode) {
+          prevNode.right = deletable.right;
+        }
+        return;
       }
-      return;
-    }
-    if (!deletable.left) {
-      if (prevNode.left == currNode) {
-        prevNode.left = deletable.right;
-      } else if (prevNode.right == currNode) {
-        prevNode.right = deletable.right;
+      if (!deletable.right) {
+        if (prevNode.left == currNode) {
+          prevNode.left = deletable.left;
+        } else if (prevNode.right == currNode) {
+          prevNode.right = deletable.left;
+        }
+        return;
       }
-      return;
-    }
-    if (!deletable.right) {
-      if (prevNode.left == currNode) {
-        prevNode.left = deletable.left;
-      } else if (prevNode.right == currNode) {
-        prevNode.right = deletable.left;
+
+      let minNode = deletable.right;
+      let prevMinNode = deletable;
+
+      while (true) {
+        if (!minNode.left) {
+          break;
+        }
+        prevMinNode = minNode;
+        minNode = minNode.left;
       }
-      return;
-    }
 
-    let minNode = deletable.right;
-    let prevMinNode = deletable;
+      deletable.data = minNode.data;
 
-    while (true) {
-      if (!minNode.left) {
-        break;
-      }
-      prevMinNode = minNode;
-      minNode = minNode.left;
-    }
-
-    deletable.data = minNode.data;
-
-    if (prevMinNode.left == minNode) {
-      prevMinNode.left = null;
-    } else if (prevMinNode.right == minNode) {
-      prevMinNode.right = null;
+      removeKek(deletable, data);
     }
   }
 
