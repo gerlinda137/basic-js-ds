@@ -84,9 +84,69 @@ class BinarySearchTree {
     }
   }
 
-  remove(/* data */) {
-    throw new NotImplementedError("Not implemented");
-    // remove line with error and write your code here
+  remove(data) {
+    let currNode = this.rootNode;
+    let prevNode = currNode;
+    while (true) {
+      if (!currNode) {
+        return null;
+      }
+      if (data < currNode.data) {
+        prevNode = currNode;
+        currNode = currNode.left;
+      } else if (data > currNode.data) {
+        prevNode = currNode;
+        currNode = currNode.right;
+      } else if (data == currNode.data) {
+        break;
+      }
+    }
+
+    let deletable = currNode;
+
+    if (!deletable.right && !deletable.left) {
+      if (prevNode.left == currNode) {
+        prevNode.left = null;
+      } else if (prevNode.right == currNode) {
+        prevNode.right == null;
+      }
+      return;
+    }
+    if (!deletable.left) {
+      if (prevNode.left == currNode) {
+        prevNode.left = deletable.right;
+      } else if (prevNode.right == currNode) {
+        prevNode.right = deletable.right;
+      }
+      return;
+    }
+    if (!deletable.right) {
+      if (prevNode.left == currNode) {
+        prevNode.left = deletable.left;
+      } else if (prevNode.right == currNode) {
+        prevNode.right = deletable.left;
+      }
+      return;
+    }
+
+    let minNode = deletable.right;
+    let prevMinNode = deletable;
+
+    while (true) {
+      if (!minNode.left) {
+        break;
+      }
+      prevMinNode = minNode;
+      minNode = minNode.left;
+    }
+
+    deletable.data = minNode.data;
+
+    if (prevMinNode.left == minNode) {
+      prevMinNode.left = null;
+    } else if (prevMinNode.right == minNode) {
+      prevMinNode.right = null;
+    }
   }
 
   min() {
@@ -94,7 +154,7 @@ class BinarySearchTree {
     let currNode = this.rootNode;
     while (true) {
       if (!currNode.left) {
-        console.log(currNode);
+        console.log(currNode.data);
         return currNode.data;
       }
       currNode = currNode.left;
@@ -106,7 +166,7 @@ class BinarySearchTree {
     let currNode = this.rootNode;
     while (true) {
       if (!currNode.right) {
-        console.log(currNode);
+        console.log(currNode.data);
         return currNode.data;
       }
       currNode = currNode.right;
@@ -122,10 +182,10 @@ bt.add(8);
 bt.add(4);
 bt.add(32);
 bt.add(12);
-bt.add(14);
-bt.find(8);
+bt.add(54);
 bt.min();
 bt.max();
+bt.remove(1);
 
 module.exports = {
   BinarySearchTree,
