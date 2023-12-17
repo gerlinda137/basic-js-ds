@@ -90,13 +90,27 @@ class BinarySearchTree {
   }
 
   min() {
-    throw new NotImplementedError("Not implemented");
-    // remove line with error and write your code here
+    // throw new NotImplementedError("Not implemented");
+    let currNode = this.rootNode;
+    while (true) {
+      if (!currNode.left) {
+        console.log(currNode);
+        return currNode.data;
+      }
+      currNode = currNode.left;
+    }
   }
 
   max() {
-    throw new NotImplementedError("Not implemented");
-    // remove line with error and write your code here
+    // throw new NotImplementedError("Not implemented");
+    let currNode = this.rootNode;
+    while (true) {
+      if (!currNode.right) {
+        console.log(currNode);
+        return currNode.data;
+      }
+      currNode = currNode.right;
+    }
   }
 }
 
@@ -110,6 +124,8 @@ bt.add(32);
 bt.add(12);
 bt.add(14);
 bt.find(8);
+bt.min();
+bt.max();
 
 module.exports = {
   BinarySearchTree,
